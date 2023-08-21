@@ -1,38 +1,6 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "main.h"
-
-/**
- * print_char - Prints a single character.
- * @c: The character to print.
- *
- * Return: The number of characters printed.
- */
-int print_char(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-/**
- * print_string - Prints a string.
- * @str: The string to print.
- *
- * Return: The number of characters printed.
- */
-int print_string(char *str)
-{
-	int printed_chars = 0;
-
-	while (*str)
-	{
-		printed_chars += print_char(*str);
-		str++;
-	}
-
-	return (printed_chars);
-}
-
 /**
  * _printf - Produces output according to a format.
  * @format: The format string.
@@ -58,6 +26,8 @@ int _printf(const char *format, ...)
 				printed_chars += print_char(va_arg(args, int));
 			else if (*format == 's')
 				printed_chars += print_string(va_arg(args, char *));
+			else if (*format == 'd' || *format == 'i')
+				printed_chars += print_number(va_arg(args, int));
 			else if (*format == '%')
 				printed_chars += print_char('%');
 		}
