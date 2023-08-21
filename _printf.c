@@ -8,6 +8,13 @@
  *
  * Return: The number of characters printed.
  */
+/**
+ * _printf - Produces output according to a format.
+ * @format: The format string.
+ * @...: The variable number of arguments.
+ *
+ * Return: The number of characters printed.
+ */
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -30,6 +37,10 @@ int _printf(const char *format, ...)
 				printed_chars += print_number(va_arg(args, int));
 			else if (*format == '%')
 				printed_chars += print_char('%');
+			else if (*format == 'u')
+				printed_chars += print_unsigned(va_arg(args, unsigned int));
+			else if (*format == 'l')
+				printed_chars += print_long(va_arg(args, long));
 		}
 		else
 		{
